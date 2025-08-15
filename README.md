@@ -21,10 +21,10 @@ Multiplayer online karetní hra Prší vytvořená pomocí Node.js, Socket.io a 
 ```bash
 # Klonuj repozitář
 git clone <repo-url>
-cd online-prsi
+cd ferbl
 
 # Spusť pomocí Docker Compose
-docker-compose up --build
+docker compose up --build
 ```
 
 ### Bez Dockeru
