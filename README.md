@@ -1,4 +1,4 @@
-# Online Prší 🃏
+# Online Ferbl 🃏
 
 Multiplayer online karetní hra Prší vytvořená pomocí Node.js, Socket.io a Dockeru.
 
