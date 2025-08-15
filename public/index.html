@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Prší</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🃏 Online Ferbl</h1>
+        
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen">
+            <div class="login-form">
+                <h2>Připojit se do hry</h2>
+                <input type="text" id="player-name" placeholder="Tvoje jméno" maxlength="15">
+                <input type="text" id="room-id" placeholder="ID místnosti (nebo nech prázdné pro novou)">
+                <button id="join-btn">Připojit se</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <div class="game-info">
+                <div class="room-info">
+                    <span>Místnost: <span id="current-room"></span></span>
+                    <button id="start-game-btn" class="hidden">Začít hru</button>
+                </div>
+                <div class="players-list">
+                    <h3>Hráči:</h3>
+                    <div id="players-container"></div>
+                </div>
+            </div>
+
+            <div class="game-board">
+                <div class="game-center">
+                    <div class="deck-info">
+                        <div class="deck">
+                            <div class="card card-back">
+                                <span id="deck-count">52</span>
+                            </div>
+                        </div>
+                        <div class="played-pile">
+                            <div id="top-card" class="card">
+                                <!-- Top card will be displayed here -->
+                            </div>
+                            <div class="current-suit">
+                                Barva: <span id="current-suit">♠</span>
+                            </div>
+                            <div class="game-direction">
+                                Směr: <span id="game-direction">→</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-actions">
+                        <button id="draw-card-btn" disabled>Vzít kartu</button>
+                        <button id="reshuffle-btn" class="hidden">Otočit balíček</button>
+                        <div id="draw-stack" class="hidden">
+                            Musíš vzít: <span id="draw-count">0</span> karet
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player-hand">
+                <h3>Tvoje karty:</h3>
+                <div id="hand-container"></div>
+            </div>
+
+            <!-- Suit Selector Modal -->
+            <div id="suit-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Vyber barvu pro svršek:</h3>
+                    <div class="suit-options">
+                        <button class="suit-btn" data-suit="hearts" title="Srdce">
+                            <span class="card-icon hearts">
+                                <span class="corner tl">♥</span>
+                                <span class="center">♥</span>
+                                <span class="corner br">♥</span>
+                            </span>
+                            <span>Srdce</span>
+                        </button>
+                        <button class="suit-btn" data-suit="diamonds" title="Kule">
+                            <span class="card-icon diamonds">
+                                <span class="corner tl">♦</span>
+                                <span class="center">♦</span>
+                                <span class="corner br">♦</span>
+                            </span>
+                            <span>Kule</span>
+                        </button>
+                        <button class="suit-btn" data-suit="clubs" title="Žaludy">
+                            <span class="card-icon clubs">
+                                <span class="corner tl">♣</span>
+                                <span class="center">♣</span>
+                                <span class="corner br">♣</span>
+                            </span>
+                            <span>Žaludy</span>
+                        </button>
+                        <button class="suit-btn" data-suit="spades" title="Listy">
+                            <span class="card-icon spades">
+                                <span class="corner tl">♠</span>
+                                <span class="center">♠</span>
+                                <span class="corner br">♠</span>
+                            </span>
+                            <span>Listy</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Selector Modal for Spodek -->
+            <div id="value-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Vyber hodnotu pro spodek:</h3>
+                    <div class="value-options">
+                        <button class="value-btn" data-value="7" title="Sedmička">7<br><span>Sedmička</span></button>
+                        <button class="value-btn" data-value="8" title="Osmička">8<br><span>Osmička</span></button>
+                        <button class="value-btn" data-value="9" title="Devítka">9<br><span>Devítka</span></button>
+                        <button class="value-btn" data-value="10" title="Desítka">10<br><span>Desítka</span></button>
+                        <button class="value-btn" data-value="J" title="Spodek">J<br><span>Spodek</span></button>
+                        <button class="value-btn" data-value="Q" title="Svršek">Q<br><span>Svršek</span></button>
+                        <button class="value-btn" data-value="K" title="Král">K<br><span>Král</span></button>
+                        <button class="value-btn" data-value="A" title="Eso">A<br><span>Eso</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Modal -->
+            <div id="game-over-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>Konec hry!</h2>
+                    <p id="winner-text"></p>
+                    <button id="new-game-btn">Nová hra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="messages"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

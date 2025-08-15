@@ -1,0 +1,561 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Screen Management */
+.screen {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Login Screen */
+.login-form {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-form h2 {
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+}
+
+.login-form input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.login-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Game Screen */
+#game-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 90vh;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.room-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.players-list {
+    min-width: 200px;
+}
+
+.players-list h3 {
+    margin-bottom: 10px;
+}
+
+.player {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player.current {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    animation: pulse 2s infinite;
+}
+
+.player.offline {
+    opacity: 0.5;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Game Board */
+.game-board {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.deck-info {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.deck, .played-pile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Cards */
+.card {
+    width: 85px;
+    height: 120px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    padding: 5px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.card.playable {
+    animation: glow 2s infinite;
+    border: 3px solid #ffd700;
+    background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(255,255,255,0.9));
+}
+
+.card.playable:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.6);
+}
+
+@keyframes glow {
+    0%, 100% { 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        border-color: #ffd700;
+    }
+    50% { 
+        box-shadow: 0 4px 20px rgba(255,215,0,0.8);
+        border-color: #ffed4e;
+    }
+}
+
+.card-back {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.card.hearts, .card.diamonds {
+    background: white;
+    color: #e74c3c;
+}
+
+.card.clubs, .card.spades {
+    background: white;
+    color: #2c3e50;
+}
+
+.card-value {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.card-suit {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.card-name {
+    font-size: 9px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 1;
+}
+
+.card-points {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 8px;
+    font-weight: bold;
+    color: #666;
+    background: rgba(255,255,255,0.8);
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+.current-suit {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.game-direction {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #FFD700;
+}
+
+/* Player Hand */
+.player-hand {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.player-hand h3 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#hand-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#draw-card-btn {
+    font-size: 16px;
+    padding: 15px 30px;
+}
+
+#reshuffle-btn {
+    font-size: 16px;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    margin-left: 10px;
+}
+
+#reshuffle-btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #45a049, #4CAF50);
+}
+
+#draw-stack {
+    background: rgba(255,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #ff6b6b;
+    font-weight: bold;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.suit-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.suit-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+    text-align: center;
+}
+
+.value-options {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.value-btn {
+    padding: 12px 8px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 50px;
+    text-align: center;
+    font-weight: bold;
+    flex: 1;
+    max-width: 80px;
+}
+
+.value-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.suit-btn span {
+    font-size: 10px;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+.suit-btn[data-suit="hearts"], .suit-btn[data-suit="diamonds"] {
+    color: #e74c3c;
+}
+
+.suit-btn:hover {
+    border-color: #ff6b6b;
+    transform: scale(1.1);
+}
+
+/* === Suit selector (svršek) – nové barvy a vzhled === */
+.modal .suit-options {
+    gap: 12px;
+}
+
+/* Základ suit tlačítek (přebije obecný styl buttonu) */
+.suit-btn {
+    background: #f5f7fa;
+    color: #222;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    min-width: 96px;
+    min-height: 96px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 28px;
+    font-weight: 900;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.suit-btn span {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.95;
+}
+
+/* Individuální barvy podle barvy karet */
+.suit-btn[data-suit="hearts"] {
+    background: linear-gradient(135deg, #ffdde1, #ee4266);
+    color: #ffffff;
+}
+
+.suit-btn[data-suit="diamonds"] {
+    background: linear-gradient(135deg, #ffe2cc, #ff7a00);
+    color: #2b1600;
+}
+
+.suit-btn[data-suit="clubs"] {
+    background: linear-gradient(135deg, #d8ffe4, #16a34a);
+    color: #083d2b;
+}
+
+.suit-btn[data-suit="spades"] {
+    background: linear-gradient(135deg, #e6ebf1, #111827);
+    color: #ffffff;
+}
+
+/* Hover a focus stavy */
+.suit-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.suit-btn:focus { outline: none; }
+
+.suit-btn[data-suit="hearts"]:hover { box-shadow: 0 0 0 3px rgba(238, 66, 102, 0.4), 0 10px 24px rgba(0,0,0,0.35); }
+.suit-btn[data-suit="diamonds"]:hover { box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.35), 0 10px 24px rgba(0,0,0,0.35); }
+.suit-btn[data-suit="clubs"]:hover { box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.35), 0 10px 24px rgba(0,0,0,0.35); }
+.suit-btn[data-suit="spades"]:hover { box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.35), 0 10px 24px rgba(0,0,0,0.35); }
+
+/* Lepší kontrast textů názvů podle barvy pozadí */
+.suit-btn[data-suit="diamonds"] span,
+.suit-btn[data-suit="clubs"] span { color: rgba(0,0,0,0.85); }
+
+.suit-btn[data-suit="hearts"] span,
+.suit-btn[data-suit="spades"] span { color: rgba(255,255,255,0.95); }
+
+/* Mobilní úprava */
+@media (max-width: 768px) {
+    .suit-btn {
+        min-width: 80px;
+        min-height: 80px;
+        font-size: 24px;
+        padding: 12px 10px;
+    }
+    .suit-btn span { font-size: 11px; }
+}
+
+/* Mini-karta uvnitř tlačítka barvy */
+.suit-btn .card-icon {
+    position: relative;
+    width: 64px;
+    height: 88px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.suit-btn .card-icon .corner {
+    position: absolute;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.suit-btn .card-icon .corner.tl { top: 6px; left: 6px; }
+.suit-btn .card-icon .corner.br { bottom: 6px; right: 6px; transform: rotate(180deg); }
+
+.suit-btn .card-icon .center {
+    font-size: 36px;
+    line-height: 1;
+}
+
+/* Barvy symbolů v mini‑kartách */
+.suit-btn .card-icon.hearts .corner,
+.suit-btn .card-icon.hearts .center,
+.suit-btn .card-icon.diamonds .corner,
+.suit-btn .card-icon.diamonds .center { color: #e11d48; }
+
+.suit-btn .card-icon.clubs .corner,
+.suit-btn .card-icon.clubs .center,
+.suit-btn .card-icon.spades .corner,
+.suit-btn .card-icon.spades .center { color: #111827; }
+
+/* Vzhled rámečku mini‑karty podle barvy */
+.suit-btn .card-icon.hearts,
+.suit-btn .card-icon.diamonds { box-shadow: inset 0 0 0 2px rgba(225, 29, 72, 0.4); }
+
+.suit-btn .card-icon.clubs,
+.suit-btn .card-icon.spades { box-shadow: inset 0 0 0 2px rgba(17, 24, 39, 0.35); }
+
+/* Jemná animace na hover */
+.suit-btn:hover .card-icon { transform: translateY(-1px); }
